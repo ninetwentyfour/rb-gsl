@@ -104,9 +104,9 @@ gsl_config_arg(:version) { |version, check|
     gte && gsl_def("GSL_#{ary.join('_')}_LATER")
   }
 
-  raise 'Ruby/GSL requires gsl-1.15 or later.' unless later['1.15']
+  raise 'Ruby/GSL requires gsl-1.15 or later.' unless later['1.14']
 
-  %w[1.15 1.16 2.0 2.1].each { |v| later[v] }
+  %w[1.14 1.15 1.16 2.0 2.1].each { |v| later[v] }
 }
 
 gsl_config_arg(:cflags) { |cflags, check|
@@ -153,7 +153,7 @@ external_libs.each do |library|
   gsl_gem_config(library)
   have_header("#{library}.h")
   have_header("nmatrix_config.h") if library == 'nmatrix'
-  have_library(library) if RUBY_PLATFORM =~ /cygwin|mingw/  
+  have_library(library) if RUBY_PLATFORM =~ /cygwin|mingw/
 end
 
 unless arg_config('--disable-tamu-anova')
